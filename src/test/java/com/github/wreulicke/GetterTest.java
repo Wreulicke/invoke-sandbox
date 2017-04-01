@@ -39,22 +39,22 @@ public class GetterTest {
 
   @Test
   public void test4() throws Throwable {
-    Lookup publicLookup = MethodHandles.lookup();
-    assertThat(publicLookup.findGetter(TestObject.class, "stringField", String.class)
+    Lookup lookup = MethodHandles.lookup();
+    assertThat(lookup.findGetter(TestObject.class, "stringField", String.class)
       .invoke(new TestObject("test"))).isEqualTo("test");
   }
 
   @Test
   public void test5() throws Throwable {
-    Lookup publicLookup = MethodHandles.lookup();
-    assertThat(publicLookup.findGetter(PackagePrivateTestObject.class, "stringField", String.class)
+    Lookup lookup = MethodHandles.lookup();
+    assertThat(lookup.findGetter(PackagePrivateTestObject.class, "stringField", String.class)
       .invoke(new PackagePrivateTestObject("test"))).isEqualTo("test");
   }
 
   @Test
   public void test6() throws Throwable {
-    Lookup publicLookup = MethodHandles.lookup();
-    assertThat(publicLookup.findGetter(PublicTestObject.class, "stringField", String.class)
+    Lookup lookup = MethodHandles.lookup();
+    assertThat(lookup.findGetter(PublicTestObject.class, "stringField", String.class)
       .invoke(new PublicTestObject("test"))).isEqualTo("test");
   }
 
