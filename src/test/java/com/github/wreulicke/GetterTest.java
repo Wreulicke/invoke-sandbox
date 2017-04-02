@@ -54,8 +54,8 @@ public class GetterTest {
   @Test
   public void test6() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
-    assertThat(lookup.findGetter(PublicTestObject.class, "stringField", String.class)
-      .invoke(new PublicTestObject("test"))).isEqualTo("test");
+    MethodHandle handle = lookup.findGetter(PublicTestObject.class, "stringField", String.class);
+    assertThat(handle.invoke(new PublicTestObject("test"))).isEqualTo("test");
   }
 
   @AllArgsConstructor

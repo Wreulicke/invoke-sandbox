@@ -18,6 +18,9 @@ public class InvokeTest {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.bind(new TestObject(), "get", MethodType.methodType(String.class));
     assertThat(handle.invoke()).isEqualTo("getting.");
+    MethodHandle handle2 = lookup.findVirtual(TestObject.class, "get", MethodType.methodType(String.class));
+    assertThat(handle2.invoke(new TestObject())).isEqualTo("getting.");
+
   }
 
   @Test

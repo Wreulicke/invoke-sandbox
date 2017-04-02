@@ -17,14 +17,21 @@ import lombok.AllArgsConstructor;
 public class InvokeTest2 {
 
   @Test
+  public void test0() throws Throwable {
+    Lookup lookup = MethodHandles.lookup();
+    MethodHandle handle = lookup.findVirtual(HasMethodObject.class, "getField", MethodType.methodType(String.class, String.class));
+    assertThat(handle.invoke(new HasMethodObject("yyy"), "xxxx")).isEqualTo("yyyxxxx");
+  }
+
+  @Test
   public void test1() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findVirtual(HasMethodObject.class, "getField", MethodType.methodType(String.class, String.class));
-    MethodHandle xxx = MethodHandles.insertArguments(handle, 1, "xxxx");
-    assertThat(xxx.invoke(new HasMethodObject("yyy"))).isEqualTo("yyyxxxx");
+    MethodHandle handle2 = MethodHandles.insertArguments(handle, 1, "xxxx");
+    assertThat(handle2.invoke(new HasMethodObject("yyy"))).isEqualTo("yyyxxxx");
 
-    MethodHandle permute = MethodHandles.permuteArguments(handle, MethodType.methodType(String.class, String.class, HasMethodObject.class), 1, 0);;
-    assertThat(permute.invoke("zzzz", new HasMethodObject("yyy"))).isEqualTo("yyyzzzz");
+    MethodHandle permuted = MethodHandles.permuteArguments(handle, MethodType.methodType(String.class, String.class, HasMethodObject.class), 1, 0);;
+    assertThat(permuted.invoke("zzzz", new HasMethodObject("yyy"))).isEqualTo("yyyzzzz");
 
   }
 
@@ -48,11 +55,15 @@ public class InvokeTest2 {
     MethodType methodType = MethodType.genericMethodType(1, true)
       .changeReturnType(String.class)
       .changeParameterType(0, String.class);
-
+    assertThat(methodType.toMethodDescriptorString()).isEqualTo("(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;");
     MethodHandle handle = lookup.findStatic(MessageFormat.class, "format", methodType);
     MethodHandle formatter = handle.bindTo("format strings {0} {1}");
     assertThat(formatter.asVarargsCollector(Object[].class)
-      .invokeWithArguments("1", "2")).isEqualTo("format strings 1 2");
+      .invoke("1", "2")).isEqualTo("format strings 1 2");
+    assertThat(formatter.invoke(new Object[] {
+      "1",
+      "2"
+    })).isEqualTo("format strings 1 2");
   }
 
   @Test

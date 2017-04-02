@@ -20,7 +20,7 @@ public class ProxiesTest {
   }
 
   @Test
-  public void test1() throws NoSuchMethodException, IllegalAccessException {
+  public void test1() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findStatic(ProxiesTest.class, "test", MethodType.methodType(boolean.class, Object.class));
 
