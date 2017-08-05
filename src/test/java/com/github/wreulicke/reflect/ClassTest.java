@@ -23,7 +23,7 @@ public class ClassTest {
   }
 
   /**
-   * クラス編
+   * case for class
    */
   @Test
   public void test1() {
@@ -50,7 +50,7 @@ public class ClassTest {
   }
 
   /**
-   * 配列とクラスの関係編
+   * case for array and class
    */
   @Test
   public void test2() {
@@ -60,20 +60,18 @@ public class ClassTest {
     assertThat(clazz2.getComponentType()).isEqualTo(clazz1);
     assertThat(clazz1.isArray()).isFalse();
     assertThat(clazz2.isArray()).isTrue();
-    // 良い子のみんなは使っちゃダメ。
     assertThat(clazzes(new ClassTest())).isEqualTo(ClassTest.class);
   }
 
 
   /**
-   * 合成クラスってなんやねん
+   * sythesized
    * 
    * @throws IllegalAccessException
    * @throws NoSuchFieldException
    */
   @Test
   public void test3() throws NoSuchFieldException, IllegalAccessException {
-    // もちろん合成クラスじゃない
     assertThat(ClassTest.class.isSynthetic()).isFalse();
     assertThat(EnclosedType.class.isSynthetic()).isFalse();
     assertThat(new Object() {}.getClass()
@@ -82,18 +80,18 @@ public class ClassTest {
       .isSynthetic()).isFalse();
     assertThat(ClassTest[].class.isSynthetic()).isFalse();
 
-    // Proxyは合成クラスじゃない
+    // Proxy class is synthesized
     assertThat(Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), new Class[] {
       Predicate.class
     }, (proxy, name, args) -> null)
       .getClass()
       .isSynthetic()).isFalse();
 
-    // ラムダ式は合成クラス
+    // lambda expression instance is synthesized
     assertThat(((Predicate<Integer>) (Integer i) -> true).getClass()
       .isSynthetic()).isTrue();
 
-    // 似たようなメソッドで生成したクラスは合成クラスではない
+    // method handle proxies is not synthesized
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findStaticGetter(System.class, "out", PrintStream.class);
     assertThat(MethodHandleProxies.asInterfaceInstance(Supplier.class, handle)
@@ -101,9 +99,6 @@ public class ClassTest {
       .isSynthetic()).isFalse();
   }
 
-  /**
-   * キャストとかその辺
-   */
   @Test
   public void test4() {
     ClassTest.class.cast(new ClassTest());
