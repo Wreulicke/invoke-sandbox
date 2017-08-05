@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import lombok.AllArgsConstructor;
 
-public class GetterTest {
+class GetterTest {
+
   @Test
-  public void test1() throws Throwable {
+  void test1() throws Throwable {
     Lookup publicLookup = MethodHandles.publicLookup();
     assertThatThrownBy(() -> {
       MethodHandle handle = publicLookup.findGetter(TestObject.class, "stringField", String.class);
@@ -22,7 +23,7 @@ public class GetterTest {
   }
 
   @Test
-  public void test2() throws Throwable {
+  void test2() throws Throwable {
     Lookup publicLookup = MethodHandles.publicLookup();
     assertThatThrownBy(() -> {
       MethodHandle handle = publicLookup.findGetter(PackagePrivateTestObject.class, "stringField", String.class);
@@ -31,28 +32,28 @@ public class GetterTest {
   }
 
   @Test
-  public void test3() throws Throwable {
+  void test3() throws Throwable {
     Lookup publicLookup = MethodHandles.publicLookup();
     assertThat(publicLookup.findGetter(PublicTestObject.class, "stringField", String.class)
       .invoke(new PublicTestObject("test"))).isEqualTo("test");
   }
 
   @Test
-  public void test4() throws Throwable {
+  void test4() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     assertThat(lookup.findGetter(TestObject.class, "stringField", String.class)
       .invoke(new TestObject("test"))).isEqualTo("test");
   }
 
   @Test
-  public void test5() throws Throwable {
+  void test5() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     assertThat(lookup.findGetter(PackagePrivateTestObject.class, "stringField", String.class)
       .invoke(new PackagePrivateTestObject("test"))).isEqualTo("test");
   }
 
   @Test
-  public void test6() throws Throwable {
+  void test6() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findGetter(PublicTestObject.class, "stringField", String.class);
     assertThat(handle.invoke(new PublicTestObject("test"))).isEqualTo("test");

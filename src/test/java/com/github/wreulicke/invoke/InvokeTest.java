@@ -12,9 +12,10 @@ import org.junit.jupiter.api.Test;
 
 import lombok.AllArgsConstructor;
 
-public class InvokeTest {
+class InvokeTest {
+
   @Test
-  public void test1() throws Throwable {
+  void test1() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.bind(new TestObject(), "get", MethodType.methodType(String.class));
     assertThat(handle.invoke()).isEqualTo("getting.");
@@ -24,7 +25,7 @@ public class InvokeTest {
   }
 
   @Test
-  public void test2() throws Throwable {
+  void test2() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     assertThatThrownBy(() -> {
       MethodHandle handle = lookup.bind(new TestObject(), "privateGet", MethodType.methodType(String.class));
@@ -34,7 +35,7 @@ public class InvokeTest {
   }
 
   @Test
-  public void test3() throws Throwable {
+  void test3() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.bind(new TestObject(), "packagePrivateGet", MethodType.methodType(String.class));
     assertThat(handle.invoke()).isEqualTo("default getting.");

@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 
-public class ClassTest {
+class ClassTest {
 
   public static class EnclosedType {
     private class Inner {
@@ -24,7 +24,7 @@ public class ClassTest {
    * case for class
    */
   @Test
-  public void test1() {
+  void test1() {
     assertThat(ClassTest.class.getName()).isEqualTo("com.github.wreulicke.reflect.ClassTest");
     assertThat(new ClassTest().getClass()
       .getName()).isEqualTo("com.github.wreulicke.reflect.ClassTest");
@@ -51,7 +51,7 @@ public class ClassTest {
    * case for array and class
    */
   @Test
-  public void test2() {
+  void test2() {
     Class<?> clazz1 = ClassTest.class;
     Class<?> clazz2 = ClassTest[].class;
 
@@ -69,7 +69,7 @@ public class ClassTest {
    * @throws NoSuchFieldException
    */
   @Test
-  public void test3() throws NoSuchFieldException, IllegalAccessException {
+  void test3() throws NoSuchFieldException, IllegalAccessException {
     assertThat(ClassTest.class.isSynthetic()).isFalse();
     assertThat(EnclosedType.class.isSynthetic()).isFalse();
     assertThat(new Object() {}.getClass()
@@ -98,7 +98,7 @@ public class ClassTest {
   }
 
   @Test
-  public void test4() {
+  void test4() {
     ClassTest.class.cast(new ClassTest());
     ClassTest.class.isAssignableFrom(new ClassTest().getClass());
     new ClassTest() {}.getClass()

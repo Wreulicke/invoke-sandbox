@@ -14,17 +14,17 @@ import org.junit.jupiter.api.Test;
 
 import lombok.AllArgsConstructor;
 
-public class InvokeTest2 {
+class InvokeTest2 {
 
   @Test
-  public void test0() throws Throwable {
+  void test0() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findVirtual(HasMethodObject.class, "getField", MethodType.methodType(String.class, String.class));
     assertThat(handle.invoke(new HasMethodObject("yyy"), "xxxx")).isEqualTo("yyyxxxx");
   }
 
   @Test
-  public void test1() throws Throwable {
+  void test1() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findVirtual(HasMethodObject.class, "getField", MethodType.methodType(String.class, String.class));
     MethodHandle handle2 = MethodHandles.insertArguments(handle, 1, "xxxx");
@@ -36,7 +36,7 @@ public class InvokeTest2 {
   }
 
   @Test
-  public void test2() throws Throwable {
+  void test2() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     BiFunction<Integer, Integer, Integer> addFunction = (x, y) -> x + y;
     MethodHandle lambda = lookup.findVirtual(BiFunction.class, "apply", MethodType.methodType(Object.class, Object.class, Object.class));
@@ -50,7 +50,7 @@ public class InvokeTest2 {
   }
 
   @Test
-  public void test3() throws Throwable {
+  void test3() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodType methodType = MethodType.genericMethodType(1, true)
       .changeReturnType(String.class)
@@ -67,7 +67,7 @@ public class InvokeTest2 {
   }
 
   @Test
-  public void test4() throws Throwable {
+  void test4() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodType methodType = MethodType.genericMethodType(1, true)
       .changeReturnType(String.class)

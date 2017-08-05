@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 
 import org.junit.jupiter.api.Test;
 
-public class MethodTest {
+class MethodTest {
   public static class MethodDummy {
     public boolean publicMethod() {
       return true;
@@ -18,16 +18,18 @@ public class MethodTest {
     }
   }
 
+  public void target() {}
+
   @Test
-  public void test0() throws NoSuchMethodException, SecurityException {
+  void test0() throws NoSuchMethodException, SecurityException {
     Method method = MethodDummy.class.getMethod("publicMethod");
     assertThat(method.getReturnType()).isEqualTo(boolean.class);
     assertThat(method.getParameterCount()).isEqualTo(0);
   }
 
   @Test
-  public void test1() throws NoSuchMethodException, SecurityException {
-    assertThat(MethodTest.class.getMethods()).filteredOn((x) -> "test1".equals(x.getName()))
+  void test1() throws NoSuchMethodException, SecurityException {
+    assertThat(MethodTest.class.getMethods()).filteredOn((x) -> "target".equals(x.getName()))
       .hasSize(1);
 
     assertThatThrownBy(() -> {
@@ -37,7 +39,7 @@ public class MethodTest {
   }
 
   @Test
-  public void test2() throws Throwable {
+  void test2() throws Throwable {
     assertThat(MethodDummy.class.getMethod("publicMethod")
       .invoke(new MethodDummy())).isEqualTo(true);
 

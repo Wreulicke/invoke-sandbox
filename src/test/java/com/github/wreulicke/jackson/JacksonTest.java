@@ -11,7 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 import lombok.Value;
 
-public class JacksonTest {
+class JacksonTest {
+
   @Test
   public void test1() throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();

@@ -12,15 +12,16 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-public class ProxiesTest {
+class ProxiesTest {
 
   @SuppressWarnings("unused")
   private static boolean test(Object x) {
     return x instanceof String;
   }
 
+
   @Test
-  public void test1() throws Throwable {
+  void test1() throws Throwable {
     Lookup lookup = MethodHandles.lookup();
     MethodHandle handle = lookup.findStatic(ProxiesTest.class, "test", MethodType.methodType(boolean.class, Object.class));
 
