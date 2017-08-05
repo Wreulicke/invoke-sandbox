@@ -1,6 +1,7 @@
 
 apply plugin: 'java-library'
 apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'jacoco'
 
 buildscript {
     repositories {
@@ -9,6 +10,15 @@ buildscript {
     dependencies {
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC2'
     }
+}
+
+def junitPlatformTestTask = project.tasks.getByName('junitPlatformTest')
+jacoco {
+    applyTo junitPlatformTestTask
+}
+
+task jacoco(type: JacocoReport) {
+    executionData = files('build/jacoco/junitPlatformTest.exec')
 }
 
 repositories {
