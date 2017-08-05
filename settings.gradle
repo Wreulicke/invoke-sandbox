@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'invoke-sandbox'
+rootProject.name = 'reflect-sandbox'
