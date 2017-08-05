@@ -11,12 +11,10 @@ import java.lang.reflect.Proxy;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-@XmlRootElement
 public class ClassTest {
+
   public static class EnclosedType {
     private class Inner {
     }

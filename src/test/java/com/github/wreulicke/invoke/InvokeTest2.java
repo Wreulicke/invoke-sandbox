@@ -10,7 +10,7 @@ import java.lang.invoke.MethodType;
 import java.text.MessageFormat;
 import java.util.function.BiFunction;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import lombok.AllArgsConstructor;
 
