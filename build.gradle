@@ -18,6 +18,8 @@ jacoco {
 }
 
 task jacoco(type: JacocoReport) {
+    classDirectories = files("build/classes/java/main")
+    sourceDirectories = files("src/main/java")
     executionData = files('build/jacoco/junitPlatformTest.exec')
 }
 
