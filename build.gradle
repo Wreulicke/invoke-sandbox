@@ -12,9 +12,8 @@ buildscript {
     }
 }
 
-def junitPlatformTestTask = project.tasks.getByName('junitPlatformTest')
 jacoco {
-    applyTo junitPlatformTestTask
+    applyTo junitPlatformTest
 }
 
 task jacoco(type: JacocoReport) {
