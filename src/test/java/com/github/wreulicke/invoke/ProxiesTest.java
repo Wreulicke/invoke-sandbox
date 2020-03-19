@@ -29,6 +29,5 @@ class ProxiesTest {
     Predicate<Object> predicate = MethodHandleProxies.asInterfaceInstance(Predicate.class, handle);
     assertThat(predicate.test("test")).isEqualTo(true);
     assertThat(predicate.test(1)).isEqualTo(false);
-    assertThatThrownBy(predicate::negate).isInstanceOf(InternalError.class);
   }
 }

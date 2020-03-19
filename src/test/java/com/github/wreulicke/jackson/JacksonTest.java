@@ -22,7 +22,6 @@ class JacksonTest {
     System.out.println(fuga);
     Moga moga = mapper.readValue("{ \"str\" : \"test\" }", Moga.class);
     System.out.println(moga);
-
   }
 
   @Data

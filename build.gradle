@@ -1,25 +1,11 @@
 
 apply plugin: 'java-library'
-apply plugin: 'org.junit.platform.gradle.plugin'
 apply plugin: 'jacoco'
 
-buildscript {
-    repositories {
-   		jcenter()
-    }
-    dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC2'
-    }
-}
+sourceCompatibility = 8
 
-jacoco {
-    applyTo junitPlatformTest
-}
-
-task jacoco(type: JacocoReport) {
-    classDirectories = files("build/classes/java/main")
-    sourceDirectories = files("src/main/java")
-    executionData = files('build/jacoco/junitPlatformTest.exec')
+test {
+    useJUnitPlatform()
 }
 
 repositories {
@@ -28,13 +14,14 @@ repositories {
 
 dependencies {
 
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-    compileOnly  'org.projectlombok:lombok:1.16.14'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
     
-    testCompileOnly   'org.projectlombok:lombok:1.16.14'
+    testCompileOnly   'org.projectlombok:lombok:1.18.10'
+    testAnnotationProcessor   'org.projectlombok:lombok:1.18.10'
     testImplementation 'org.assertj:assertj-core:3.8.0'
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-RC2")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-RC2")
-    
+    testImplementation "org.junit.jupiter:junit-jupiter:5.5.2"
+
 }
 
